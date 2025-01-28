@@ -7,16 +7,17 @@ FUNCTION zmf_test_0001.
 *"      ERROR
 *"----------------------------------------------------------------------
 
-  DATA: lv_maktx TYPE maktx,
-        lv_matnr TYPE matnr.
+  DATA: lv_matnr TYPE matnr.
 
-  SELECT SINGLE matnr
+  SELECT matnr UP TO 1 ROWS
     FROM mara
     INTO lv_matnr
-    WHERE matnr EQ iv_matnr.
+    WHERE matnr EQ iv_matnr
+   ORDER BY PRIMARY KEY.
+  ENDSELECT.
 
   IF sy-subrc NE 0.
-    MESSAGE e345(ZWM) RAISE error.
+    RAISE error.
   ENDIF.
 
 ENDFUNCTION.
